@@ -8,7 +8,11 @@ const feedSlice = createSlice({
       return action.payload;
     },
     removeUserFromFeed: (state, action) => {
-      const newFeed = state.filter((user) => user._id !== action.payload);
+      console.log("here", action.payload);
+      const newFeed = state.filter((user) => {
+        console.log("inside",user._id)
+       return  user._id !== action.payload;
+      });
       return newFeed;
     },
   },

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, USER_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
@@ -16,6 +16,7 @@ const NavBar = () => {
       return navigate("/login");
     } catch (err) {
       // Error logic maybe redirect to error page
+      console.log(err)
     }
   };
 
@@ -23,12 +24,12 @@ const NavBar = () => {
     <div className="navbar bg-base-300">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
-          👩‍💻 DevTinder
+          👩‍💻 CodeCircle
         </Link>
       </div>
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">Welcome, {user.firstName}</div>
+          <div className="form-control">Welcome {user.firstName}</div>
           <div className="dropdown dropdown-end mx-5 flex">
             <div
               tabIndex={0}
@@ -36,7 +37,7 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="user photo" src={user.photoUrl} />
+                <img alt="user photo" src={user.photoUrl ? user.photoUrl:USER_URL} />
               </div>
             </div>
             <ul
